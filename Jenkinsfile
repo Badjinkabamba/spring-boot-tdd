@@ -31,5 +31,21 @@ pipeline {
                       }
                     }
         }
+
+         stage('Docker Build and Push') {
+                    steps {
+                        withDockerRegistry([credentialsId: "my-docker-hub", url: ""]) {
+                            sh 'docker build -t badjinkabamba/spring-boot-tdd:$BUILD_NUMBER .'
+                            sh 'docker push badjinkabamba/spring-boot-tdd:$BUILD_NUMBER'
+                        }
+
+                    }
+                }
+
+          stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi badjinkabamba/spring-boot-tdd:$BUILD_NUMBER"
+            }
+           }
     }
 }
