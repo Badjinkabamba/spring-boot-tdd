@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-boot-tdd
+  name: spring-boot-tdd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-tdd
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: spring-boot-tdd
+    spec:
+      containers:
+        - image: your-docker-image
+          name: spring-boot-tdd-container
+          ports:
+            - containerPort: 8180
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: spring-boot-tdd
+  name: spring-boot-tdd-svc
+spec:
+  ports:
+    - port: 8180
+      protocol: TCP
+      targetPort: 8180
+  selector:
+    app: spring-boot-tdd
+  type: NodePort
