@@ -51,10 +51,6 @@ pipeline {
            stage('Kubernetes Deployment - DEV') {
             steps {
              withKubeConfig([credentialsId: 'kubernetes-config']) {
-              sh 'chmod 777 /home/vagrant/.minikube/ca.crt'
-              sh 'chmod 777 /home/vagrant/.minikube/profiles/minikube/client.crt'
-              sh 'chmod 777 /home/vagrant/.minikube/profiles/minikube/client.key'
-              sh 'chmod 777 /home/vagrant/.minikube/profiles/minikube/'
               sh "sed -i 's#replace#badjinkabamba/spring-boot-tdd:${BUILD_NUMBER}#g' k8s_deployment_service.yaml"
               sh "kubectl apply -f k8s_deployment_service.yaml"
               }
