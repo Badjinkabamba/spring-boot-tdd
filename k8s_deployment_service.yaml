@@ -16,10 +16,8 @@ spec:
         app: spring-boot-tdd
     spec:
       containers:
-        - image: your-docker-image
+        - image: replace
           name: spring-boot-tdd-container
-          ports:
-            - containerPort: 8180
 
 ---
 apiVersion: v1
