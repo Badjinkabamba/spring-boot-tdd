@@ -46,6 +46,7 @@ pipeline {
 
 
          stage('Docker Build and Push') {
+         when { expression { false } }
                     steps {
                         withDockerRegistry([credentialsId: "my-docker-hub", url: ""]) {
                             sh 'docker build -t badjinkabamba/spring-boot-tdd:$BUILD_NUMBER .'
@@ -56,12 +57,14 @@ pipeline {
                 }
 
           stage('Remove Unused docker image') {
+          when { expression { false } }
             steps{
                 sh "docker rmi badjinkabamba/spring-boot-tdd:$BUILD_NUMBER"
             }
            }
 
            stage('Kubernetes Deployment - DEV') {
+           when { expression { false } }
             steps {
              withKubeConfig([credentialsId: 'kubernetes-config']) {
               sh "sed -i 's#replace#badjinkabamba/spring-boot-tdd:${BUILD_NUMBER}#g' k8s_deployment_service.yaml"
