@@ -22,7 +22,7 @@ pipeline {
 
         stage('Unit Tests - JUnit and Jacoco') {
                     steps {
-                       sh "mvn test"
+                       sh "mvn test -Dgroups=unitaires"
                     }
                     post {
                       always{
@@ -30,19 +30,6 @@ pipeline {
                       jacoco execPattern: 'target/jacoco.exec'
                       }
                     }
-        }
-
-        stage('Unit Tests - JUnit and Jacoco') {
-
-         steps {
-         sh "mvn test -Dgroups=unitaires"
-         }
-         post {
-         always {
-         junit 'target/surefire-reports/*.xml'
-         jacoco execPattern: 'target/jacoco.exec'
-         }
-         }
         }
 
         stage('Service - IntegrationTest') {
