@@ -84,7 +84,8 @@
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>com.formation.*</param>
+                        <param>com.formation.service.*</param>
+                        <param>com.formation.web.model.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>com.formation.service.*</param>
@@ -100,5 +101,7 @@
 
 
     </build>
+
+
 
 </project>
