@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.formation.web.error.ConflictException;
 import com.formation.web.error.NotFoundException;
 import com.formation.web.model.Customer;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @SpringBootTest // 1: On charge le contexte Spring
 //@ActiveProfiles("test")  // 2: On charge le profile test
+@Tag("integrations")
 @AutoConfigureTestDatabase(replace= Replace.ANY) // 3: On remplace la base de données par une base de données de test
 public class CustomerServiceIntegrationTest {
 

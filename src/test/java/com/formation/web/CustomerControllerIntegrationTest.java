@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -22,7 +23,8 @@ import com.formation.web.model.Customer;
 
 @SpringBootTest  // 1: On charge le contexte Spring
 @AutoConfigureMockMvc  // 2: On configure le MockMvc
-@ActiveProfiles("test") // 3: On charge le profile test 
+@ActiveProfiles("test") // 3: On charge le profile test
+@Tag("web")
 @AutoConfigureTestDatabase(replace = Replace.ANY) // 4: On remplace la base de données par une base de données de test
 public class CustomerControllerIntegrationTest {
 
