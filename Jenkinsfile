@@ -32,6 +32,32 @@ pipeline {
                     }
         }
 
+        stage('Unit Tests - JUnit and Jacoco') {
+
+         steps {
+         sh "mvn test -Dgroups=unitaires"
+         }
+         post {
+         always {
+         junit 'target/surefire-reports/*.xml'
+         jacoco execPattern: 'target/jacoco.exec'
+         }
+         }
+        }
+
+        stage('Service - IntegrationTest') {
+         steps{
+         sh "mvn test -Dgroups=integrations"
+         }
+        }
+
+        stage('Web - IntegrationTest') {
+         steps{
+         sh "mvn test -Dgroups=web"
+         }
+        }
+
+
          stage('Docker Build and Push') {
                     steps {
                         withDockerRegistry([credentialsId: "my-docker-hub", url: ""]) {
