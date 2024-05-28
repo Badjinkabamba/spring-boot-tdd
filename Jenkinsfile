@@ -87,7 +87,7 @@ pipeline {
 
             stage('Code coverage') {
                  environment {
-                 SCANNER_HOME = tool 'sonar_scanner'
+                 SCANNER_HOME = tool 'sonar-scanner'
                  PROJECT_KEY = "spring-boot-tdd"
                  PROJECT_NAME = "spring-boot-tdd"
                  }
