@@ -92,7 +92,7 @@ pipeline {
                  PROJECT_NAME = "spring-boot-tdd"
                  }
                  steps {
-                     withSonarQubeEnv('sonar_server') {
+                     withSonarQubeEnv('sonar-server') {
                         sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=$PROJECT_KEY \
                             -Dsonar.projectName=$PROJECT_NAME \
                             -Dsonar.java.coveragePlugin=jacoco \
