@@ -58,7 +58,7 @@ pipeline {
 
 
          stage('Docker Build and Push') {
-         when { expression { false } }
+         when { expression { true } }
                     steps {
                         withDockerRegistry([credentialsId: "my-docker-hub", url: ""]) {
                             sh 'docker build -t badjinkabamba/spring-boot-tdd:$BUILD_NUMBER .'
@@ -67,6 +67,22 @@ pipeline {
 
                     }
                 }
+
+                stage('Vulnerability Scan') {
+                          steps {
+                            parallel(
+
+                              "Trivy Scan": {
+                                 sh "bash trivy-docker-image-scan.sh"
+                              }
+                            )
+                          }
+                          post {
+                              always {
+                                 dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+                              }
+                          }
+                        }
 
           stage('Remove Unused docker image') {
           when { expression { false } }
