@@ -77,11 +77,11 @@ pipeline {
                               }
                             )
                           }
-                          post {
+                         /*  post {
                               always {
                                  dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
                               }
-                          }
+                          } */
                         }
 
           stage('Remove Unused docker image') {
